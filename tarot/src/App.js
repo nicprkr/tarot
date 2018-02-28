@@ -43,12 +43,24 @@ class App extends Component {
     }
     return (
       <div className="App">
-          <img src={broom} alt="broom-icon" onClick={()=>{this.changeTab(1)}}/><div>Chat</div>
-          <img src={potion} alt="broom-icon" onClick={()=>{this.changeTab(2)}}/>
-      <div>Ouija</div>
-          <img src={lamp} alt="broom-icon" onClick={()=>{this.changeTab(3)}}/>
-<div>Stickers</div>
-          <img src={crystal} alt="broom-icon" onClick={()=>{this.changeTab(4)}}/><div>Tarot</div>
+        <div className="nav">
+         <div className="icons">
+          <img src={broom} alt="broom-icon" onClick={()=>{this.changeTab(1)}}/><br/>
+          <div>Chat</div>
+        </div>
+        <div className="icons">
+          <img src={potion} alt="broom-icon" onClick={()=>{this.changeTab(2)}}/><br/>
+          <div>Ouija</div>
+        </div>
+        <div className="icons">
+          <img src={lamp} alt="broom-icon" onClick={()=>{this.changeTab(3)}}/><br/>
+          <div>Stickers</div>
+        </div>
+        <div className="icons">
+          <img src={crystal} alt="broom-icon" onClick={()=>{this.changeTab(4)}}/><br/>
+          <div>Tarot</div>
+        </div>
+              </div>
           <h1 className="App-title">fortune teller</h1>
 
             <div>
