@@ -4,7 +4,7 @@ import potion from './imgs/potion.png';
 import lamp from './imgs/lamp.png';
 import crystal from './imgs/crystal.png';
 import './App.css';
-import Stickers from './comp/stickers/Stickers.js';
+import Stickers from './comp/sticker/Stickers.js';
 import Chat from './comp/chat/Chat.js';
 
 class App extends Component {
