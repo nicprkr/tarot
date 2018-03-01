@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import broom from './imgs/broom.png';
-import potion from './imgs/potion.png';
-import lamp from './imgs/lamp.png';
-import crystal from './imgs/crystal.png';
+import chatIcon from './imgs/chat-icon.png';
+import ouijiIcon from './imgs/ouiji-icon.png';
+import cardsIcon from './imgs/cards-icon.png';
+import altarIcon from './imgs/altar-icon.png';
 import './App.css';
 import Stickers from './comp/sticker/Stickers.js';
 import Chat from './comp/chat/Chat.js';
+import { Container, Row, Col } from 'reactstrap';
+
 
 class App extends Component {
     constructor(props){
@@ -43,30 +45,42 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <div className="nav">
-         <div className="icons">
-          <img src={broom} alt="broom-icon" onClick={()=>{this.changeTab(1)}}/><br/>
-          <div>Chat</div>
-        </div>
-        <div className="icons">
-          <img src={potion} alt="broom-icon" onClick={()=>{this.changeTab(2)}}/><br/>
-          <div>Ouija</div>
-        </div>
-        <div className="icons">
-          <img src={lamp} alt="broom-icon" onClick={()=>{this.changeTab(3)}}/><br/>
-          <div>Stickers</div>
-        </div>
-        <div className="icons">
-          <img src={crystal} alt="broom-icon" onClick={()=>{this.changeTab(4)}}/><br/>
-          <div>Tarot</div>
-        </div>
-              </div>
-          <h1 className="App-title">fortune teller</h1>
+        
+        <Container id="nav-container" fluid>
+            <Row>   
+                <Col xs="3">
+                    <img className="img-fluid" src={chatIcon} alt="chat-icon" onClick={()=>{this.changeTab(1)}}/>
+                    <h5>Chat</h5>
+                </Col>
+                <Col xs="3">
+                    <img className="img-fluid" src={ouijiIcon} alt="ouiji-icon" onClick={()=>{this.changeTab(2)}}/>
+                    <h5>Ouija</h5>
+                </Col>
+                <Col xs="3">
+                    <img className="img-fluid" src={altarIcon} alt="altar-icon" onClick={()=>{this.changeTab(3)}}/>
+                    <h5>Stickers</h5>
+                </Col>
+                <Col xs="3">
+                    <img className="img-fluid" src={cardsIcon} alt="tarot-icon" onClick={()=>{this.changeTab(4)}}/>
+                    <h5>Tarot</h5>
+                </Col>
+            </Row>
+        </Container>
 
-            <div>
-              {comp}
-              </div>
-      </div>
+        <br />
+                        
+        <Container>
+            <Row>
+                <Col xs="12">
+                    <div>
+                        <h1 className="App-title">fortune teller</h1>
+                        {comp}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+
+      </div> 
     );
   }
 }

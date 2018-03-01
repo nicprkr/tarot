@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import mySocket from 'socket.io-client';
+import { Container, Row, Col } from 'reactstrap';
 
 class Chat extends Component {
     constructor(props){
@@ -68,13 +69,13 @@ this.joinChat = this.joinChat.bind(this);
       )
       } else if (this.state.mode === 1){
           comp = (
-          <div id="chatBox">
-              <div id="chatDisplay"></div>
-              <div id="Controls">
-              <input type="text" placeholder="type your msg here" onChange={this.handleMyMsg} />
-              <button onClick={this.sendMsg}>Send</button>
-              </div>
-              </div>
+            <div id="chat-box">
+                <div id="chat-display"></div>
+                <div id="Controls">
+                  <input type="text" placeholder="type your msg here" onChange={this.handleMyMsg} />
+                  <button onClick={this.sendMsg}>Send</button>
+                </div>
+            </div>
           );
       }
       var allNames = this.state.allUsers.map((obj, i)=>{
@@ -93,11 +94,18 @@ this.joinChat = this.joinChat.bind(this);
       });
     return (
       <div className="App">
-        <div className="userBox">All Users
-        <div>{allNames}</div>
-        </div>
-        {comp}
-        {allMsgs}
+        <Container fluid>
+            <Row>
+                <Col xs="4" id="user-box">
+                    <h5>in your coven</h5>
+                    {allNames}
+                </Col>
+                <Col xs="8" id="msg-box">
+                    {comp}
+                    {allMsgs}
+                </Col>
+            </Row>
+        </Container>
       </div>
     );
   }
