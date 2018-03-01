@@ -51,6 +51,7 @@ this.joinChat = this.joinChat.bind(this);
         });
     }
     sendMsg(){
+        console.log("clicked!");
         var msg = this.state.uName+": "+this.state.mymsg;
         this.socket.emit("sendmsg", msg);
     }
