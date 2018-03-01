@@ -37,6 +37,7 @@ this.joinChat = this.joinChat.bind(this);
         })
     
         this.socket = mySocket("https://chat-sckt.herokuapp.com/");
+   //     this.socket = mySocket("localhost:10000");
         this.socket.emit("uname", this.state.uName);
         this.socket.on("names", (data)=>{
             this.setState({
@@ -51,7 +52,6 @@ this.joinChat = this.joinChat.bind(this);
         });
     }
     sendMsg(){
-        console.log("clicked!");
         var msg = this.state.uName+": "+this.state.mymsg;
         this.socket.emit("sendmsg", msg);
     }
