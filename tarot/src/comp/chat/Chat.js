@@ -58,17 +58,17 @@ this.joinChat = this.joinChat.bind(this);
     }
     
   render() {
-      var comp = null;
+      var chatControl = null;
       
       if(this.state.mode===0){
-      comp = (
+      chatControl = (
         <div className="chat-controls">
             <input className="text-input" type="text" placeholder="choose a username" onChange={this.handleChange}/>
             <button onClick={this.joinChat}>Join Chat</button>
           </div>
       )
       } else if (this.state.mode === 1){
-          comp = (
+          chatControl = (
                 <div className="chat-controls">
                   <input className="text-input" type="text" placeholder="send your message to the coven" onChange={this.handleMyMsg} />
                   <button onClick={this.sendMsg}>Send</button>
@@ -84,9 +84,9 @@ this.joinChat = this.joinChat.bind(this);
       });
       var allMsgs = this.state.allmsg.map((obj, i)=>{
           return ( 
-              <div className="all-msg-obj" key={i}>
+            <div className="all-msg-obj" key={i}>
               {obj}
-          </div>
+            </div>
               )
       });
     return (
@@ -97,9 +97,17 @@ this.joinChat = this.joinChat.bind(this);
                     <h5>in your coven</h5>
                     {allNames}
                 </Col>
-                <Col xs="9" id="msg-box">
-                    {comp}
-                    {allMsgs}
+                <Col xs="9">
+                    <Row>
+                        <Col xs="12">
+                            <div id="msg-box" className="scrollbar">
+                                {allMsgs}
+                            </div>
+                        </Col>
+                        <Col xs="12">
+                            {chatControl}
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
         </Container>

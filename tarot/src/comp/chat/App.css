@@ -5,7 +5,7 @@
 
 #msg-box{
     min-height: 300px;
-   border-left-style: solid;
+    max-height: 500px;
     -webkit-border-image: 
       -webkit-linear-gradient(to bottom, rgba(0, 0, 0, 0), #EAE4DC ,rgba(0, 0, 0, 0)) 1 100%;
     -moz-border-image:
@@ -14,16 +14,31 @@
       -o-linear-gradient(to bottom, rgba(0, 0, 0, 0), #EAE4DC ,rgba(0, 0, 0, 0)) 1 100%;
     border-image:
       linear-gradient(to bottom, rgba(0, 0, 0, 0), #EAE4DC ,rgba(0, 0, 0, 0)) 1 100%;
-    
     border-left-style: solid;
     border-left-width: 2px;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar-thumb{
+	border-radius: 10px;
+	background-color: #FFF;
+	background-image: -webkit-linear-gradient(top, #FFF5E9 0%, #F9DAB4 30%, #E2BC8A 50%,#FFF5E9 100%);
 }
 
 #user-box h5{
     font-weight: 600;
-}
-
-.chat-box {
 }
 
 #chat-container{
@@ -31,6 +46,7 @@
     padding-bottom: 20px;
     margin-left: 0;
     padding-left: 0;
+    min-height: 300px;
 }
 
 .chat-controls{
@@ -39,25 +55,26 @@
     border-top-style: solid;
     border-top-width: 2px;
     border-top-color: #EAE4DC;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-
-input {
-    border-color:#333333;
-    border-width: 0px;
-    padding: 20px;
-    margin-top: 10px;
-    width: 40%;
+    border-bottom-width: 0;
+    border-left-width:0;
+    border-right-width:0;
+    -moz-border-image: -moz-linear-gradient(right, #ffffff 0%, #EAE4DC 50%, #ffffff 75%);
+    -webkit-border-image: -webkit-linear-gradient(right, #ffffff 0%, #EAE4DC 50%, #ffffff 75%);
+    border-image: linear-gradient(to right, #ffffff 10%, #EAE4DC 50%, #ffffff 90%);
+    border-image-slice: 1;
+    
 }
 
 .text-input{
     float: left;
+    border-width: 0px;
+    padding: 20px;
+    width: 80%;
 }
 
 button {
-    color: #EAE4DC;
+    width: 20%;
+    color: #CAA165;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 12pt;
@@ -73,12 +90,20 @@ button {
 }
 
 .all-names-obj{
-    text-align: center;
+    color: #333333;
+    text-align: left;
     padding: 4px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 10pt;
 }
 
 .all-msg-obj{
+    background-color: #F2EFEB;
+    color: #333333;
     text-align: left;
-    padding: 4px;
-    margin-left: 20px;
+    padding: 8px;
+    margin: 20px;
+    border-radius: 20px;
+    width: 30%;
 }

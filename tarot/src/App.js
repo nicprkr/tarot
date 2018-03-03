@@ -83,7 +83,8 @@ class App extends Component {
                 </Col>
             </Row>
         </Container>
-
+        <br />
+        <br />
       </div> 
     );
   }
