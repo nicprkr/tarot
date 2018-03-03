@@ -1,10 +1,22 @@
-.App {
-  text-align: center;
+#user-box {
+    background-color: white;
+    color: #333333;
 }
 
-#user-box {
-    background-color: #333333;
-    color: white;
+#msg-box{
+    min-height: 300px;
+   border-left-style: solid;
+    -webkit-border-image: 
+      -webkit-linear-gradient(to bottom, rgba(0, 0, 0, 0), #EAE4DC ,rgba(0, 0, 0, 0)) 1 100%;
+    -moz-border-image:
+      -moz-linear-gradient(to bottom, rgba(0, 0, 0, 0), #EAE4DC ,rgba(0, 0, 0, 0)) 1 100%;    
+    -o-border-image:
+      -o-linear-gradient(to bottom, rgba(0, 0, 0, 0), #EAE4DC ,rgba(0, 0, 0, 0)) 1 100%;
+    border-image:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0), #EAE4DC ,rgba(0, 0, 0, 0)) 1 100%;
+    
+    border-left-style: solid;
+    border-left-width: 2px;
 }
 
 #user-box h5{
@@ -14,20 +26,59 @@
 .chat-box {
 }
 
+#chat-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.chat-controls{
+    width: 100%;
+    padding: 20px;
+    border-top-style: solid;
+    border-top-width: 2px;
+    border-top-color: #EAE4DC;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 input {
-    padding: 10px;
+    border-color:#333333;
+    border-width: 0px;
+    padding: 20px;
     margin-top: 10px;
     width: 40%;
 }
 
+.text-input{
+    float: left;
+}
+
 button {
-    padding: 12px;
+    color: #EAE4DC;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12pt;
+    padding: 20px;
     margin: 5px;
-    background-color: skyblue;
-    border-radius: 10px;
-    border: none;
+    border-style: none;
+    background-color: white;
+    float: right;
 }
 
 .username {
-    color: skyblue;
+    color: #CAA165;
+}
+
+.all-names-obj{
+    text-align: center;
+    padding: 4px;
+}
+
+.all-msg-obj{
+    text-align: left;
+    padding: 4px;
+    margin-left: 20px;
 }

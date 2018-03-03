@@ -3,6 +3,16 @@
 .App {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
+    background-color: #333333;
+    min-height: 100vh;
+}
+
+.App-title{
+    padding: 20px;
+    border-bottom-color: #EAE4DC;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    
 }
 
 #nav-container{
@@ -14,4 +24,17 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #CAA165;
+}
+
+#comp-container{
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 24px 0px rgba(202,161,101,0.81);
+    -moz-box-shadow: 0px 0px 24px 0px rgba(202,161,101,0.81);
+    box-shadow: 0px 0px 24px 0px rgba(202,161,101,0.81);
+    border-radius: 11px 11px 11px 11px;
+    -moz-border-radius: 11px 11px 11px 11px;
+    -webkit-border-radius: 11px 11px 11px 11px;
 }

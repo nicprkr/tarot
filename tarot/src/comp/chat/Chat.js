@@ -62,45 +62,42 @@ this.joinChat = this.joinChat.bind(this);
       
       if(this.state.mode===0){
       comp = (
-        <div>
-            <input type="text" placeholder="type in your username" onChange={this.handleChange}/>
-          <button onClick={this.joinChat}>Join Chat</button>
+        <div className="chat-controls">
+            <input className="text-input" type="text" placeholder="choose a username" onChange={this.handleChange}/>
+            <button onClick={this.joinChat}>Join Chat</button>
           </div>
       )
       } else if (this.state.mode === 1){
           comp = (
-            <div id="chat-box">
-                <div id="chat-display"></div>
-                <div id="Controls">
-                  <input type="text" placeholder="type your msg here" onChange={this.handleMyMsg} />
+                <div className="chat-controls">
+                  <input className="text-input" type="text" placeholder="send your message to the coven" onChange={this.handleMyMsg} />
                   <button onClick={this.sendMsg}>Send</button>
                 </div>
-            </div>
           );
       }
       var allNames = this.state.allUsers.map((obj, i)=>{
           return ( 
-              <div key={i}>
+              <div className="all-names-obj" key={i}>
               {obj}
               </div>
               )
       });
       var allMsgs = this.state.allmsg.map((obj, i)=>{
           return ( 
-              <div key={i}>
+              <div className="all-msg-obj" key={i}>
               {obj}
           </div>
               )
       });
     return (
-      <div className="App">
-        <Container fluid>
-            <Row>
-                <Col xs="4" id="user-box">
+      <div className="Chat">
+        <Container>
+            <Row id="chat-container">
+                <Col xs="3" id="user-box">
                     <h5>in your coven</h5>
                     {allNames}
                 </Col>
-                <Col xs="8" id="msg-box">
+                <Col xs="9" id="msg-box">
                     {comp}
                     {allMsgs}
                 </Col>
