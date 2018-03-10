@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import './sticker-style.css';
 import mySocket from "socket.io-client";
-//import Rooms from './comp/Rooms';
+import Rooms from './Rooms';
 
 class Stickers extends Component {
     
@@ -22,6 +22,7 @@ class Stickers extends Component {
     
     componentDidMount(){
         this.socket = mySocket("https://sticker-sckt.herokuapp.com/");
+        //this.socket = mySocket("http://localhost:10000");
         this.socket.on("userjoined", (data)=>{
             this.setState({
                 allUsers:data
@@ -73,26 +74,6 @@ class Stickers extends Component {
             this.refs["u"+data.id].src = data.src;
         });
         
-        /*
-        this.refs.theDisplay.addEventListener("mousemove", (ev)=>{
-            if(this.state.myId === null){
-            //FAIL
-                return false;
-            }
-            
-            this.refs["u"+this.state.myId].style.left = ev.pageX + "px";
-            this.refs["u"+this.state.myId].style.top = ev.pageY + "px";
-
-            
-            this.socket.emit("mymove", {
-                x:ev.pageX,
-                y:ev.pageY,
-                id: this.state.myId,
-                src:this.refs["u"+this.state.myId].src
-            })
-
-        });
-        */
     }
     
     handleImage(evt){

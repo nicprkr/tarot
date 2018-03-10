@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Stickers from './Stickers';
+import App from './App';
+import Cards from './Cards.js';
+import Test from './Test.js';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Stickers />, document.getElementById('root'));
+ReactDOM.render(<Cards />, document.getElementById('root'));
 registerServiceWorker();

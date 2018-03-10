@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './chat-style.css';
 import mySocket from 'socket.io-client';
 import { Container, Row, Col } from 'reactstrap';
 
@@ -21,7 +21,8 @@ class Chat extends Component {
     }
     
     componentDidMount(){
-        //this.socket = mySocket("http://localhost:10001");
+        this.socket = mySocket("https://chat-sckt.herokuapp.com/");
+        //this.socket = mySocket("http://localhost:10000");
     }
     
     handleChange(e){
@@ -41,8 +42,6 @@ class Chat extends Component {
         mode:1
         })
     
-        this.socket = mySocket("https://chat-sckt.herokuapp.com/");
-        //this.socket = mySocket("localhost:10000");
         this.socket.emit("uname", this.state.uName);
         this.socket.on("names", (data)=>{
             this.setState({

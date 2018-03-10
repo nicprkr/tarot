@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+#all-names{
+    height: 300px;
+    background-color: azure;
+}
+
+#all-msgs{
+    height: 400px;
+    background-color: beige;
+}
+
+#chat-control{
+    height: 600;
+    background-color: linen;
+}

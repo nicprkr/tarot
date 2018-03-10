@@ -6,6 +6,7 @@ import altarIcon from './imgs/altar-icon.svg';
 import './App.css';
 import Stickers from './comp/sticker/Stickers.js';
 import Chat from './comp/chat/Chat.js';
+import Cards from './comp/cards/Cards.js';
 //import Ouiji from './comp/ouiji/Ouiji.js';
 import { Container, Row, Col } from 'reactstrap';
 
@@ -44,9 +45,10 @@ class App extends Component {
         )
     } else if(this.state.tab === "tarot"){
         comp = (
-        <div>Tarot</div>
+        <Cards />
         )
     }
+            
     return (
       <div className="App">
         
