@@ -150,6 +150,11 @@ class Test extends Component {
     
     componentDidMount(){
         this.socket = mySocket("http://localhost:10000");
+        this.socket.on("newCardMsg", (data)=>{
+            this.setState({
+                readerMsg: data
+            });
+        });
     }
 
     
@@ -163,11 +168,6 @@ class Test extends Component {
                 
         this.socket.emit("addCard", obj);
         
-        this.socket.on("newCardMsg", (data)=>{
-            this.setState({
-                readerMsg: data
-            });
-        });
         
     }
     
