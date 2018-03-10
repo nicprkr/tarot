@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import mySocket from "socket.io-client";
-import Rooms from './comp/Rooms';
+//import Rooms from './comp/Rooms';
 
 class Stickers extends Component {
     
@@ -22,7 +22,6 @@ class Stickers extends Component {
     
     componentDidMount(){
         this.socket = mySocket("https://sticker-sckt.herokuapp.com/");
-        //test
         this.socket.on("userjoined", (data)=>{
             this.setState({
                 allUsers:data
@@ -150,7 +149,7 @@ class Stickers extends Component {
       
       
     return (
-      <div className="App">
+      <div className="Stickers">
         {comp}
       </div>
     );

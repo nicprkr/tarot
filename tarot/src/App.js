@@ -6,6 +6,7 @@ import altarIcon from './imgs/altar-icon.svg';
 import './App.css';
 import Stickers from './comp/sticker/Stickers.js';
 import Chat from './comp/chat/Chat.js';
+//import Ouiji from './comp/ouiji/Ouiji.js';
 import { Container, Row, Col } from 'reactstrap';
 
 

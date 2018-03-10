@@ -14,24 +14,28 @@ class Chat extends Component {
             allmsg:[],
             mymsg:""
         }
-this.handleChange = this.handleChange.bind(this);
-this.joinChat = this.joinChat.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.joinChat = this.joinChat.bind(this);
         this.handleMyMsg = this.handleMyMsg.bind(this);
         this.sendMsg = this.sendMsg.bind(this);
     }
+    
     componentDidMount(){
-  //      this.socket = mySocket("http://localhost:10001");
+        //this.socket = mySocket("http://localhost:10001");
     }
+    
     handleChange(e){
         this.setState({
             uName:e.target.value
         });
     }
+    
     handleMyMsg(evt){
         this.setState({
             mymsg:evt.target.value
         })
     }
+    
     joinChat(){
         this.setState({
         mode:1
