@@ -4,6 +4,7 @@ import './Ouija.css';
 import mySocket from "socket.io-client";
 import Ask from './Ask.js';
 import Answer from './Answer.js';
+import { Container, Row, Col } from 'reactstrap';
 
 class Ouija extends Component {
     constructor(props){
@@ -13,22 +14,27 @@ class Ouija extends Component {
                 tab:0
             }
     }
-    componentDidMount(){
-     
-    }
-
 
   render() {
       var comp = null;
       if(this.state.tab === 0){
           comp = (
-            <div className="App">
-                <div>Do you seek answers?</div>
-                <div>
-                <button onClick={()=>{this.setState({ tab: 1})}}>Yes</button><br/>
-                <button onClick={()=>{this.setState({ tab: 2})}}>Bitch I'm a ghost</button>
-        </div>
-      </div>
+            <Container>
+            <Row>
+              <Col xs="12">
+              <div>Who are you?</div>
+              </Col>
+              </Row>
+              <br/>
+              <Row>
+                <Col xs="6">
+                <button onClick={()=>{this.setState({ tab: 1})}} className="ghost-btns">Seeker</button>
+                </Col>
+                <Col xs="6">
+                 <button onClick={()=>{this.setState({ tab: 2})}} className="ghost-btns" id="right">Spirit</button>
+                </Col>
+              </Row>
+        </Container>
           )
       } else if (this.state.tab === 1){
           comp = (
@@ -41,7 +47,7 @@ class Ouija extends Component {
           }
     
     return (
-      <div className="App">
+      <div className="Ouija">
         {comp}
                   </div>
     );

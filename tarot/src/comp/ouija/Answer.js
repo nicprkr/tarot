@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Pointer from './Pointer.js';
 import './Ouija.css';
 import mySocket from "socket.io-client";
+import OuijaBoard from "./../../imgs/ouijiboard-nonum-02.svg";
+import { Container, Row, Col } from 'reactstrap';
 
 class Answer extends Component {
     constructor(props){
@@ -26,21 +28,21 @@ class Answer extends Component {
       //this.socket = mySocket("https://chat-sckt.herokuapp.com/");
       this.socket = mySocket("http://localhost:10002");    
     //generates the alphabet
-      var x = 20;
-      var y = 140;
+        var x = 5;
+      var y = 26;
       var temp = [];
       this.state.alphabet.map((obj, i)=>{
-          x+= 40;
+          x+= 5;
           if(obj == "n"){
-              x = 40;
-              y+=60;
+              x = 10;
+              y+=10;
           }
           var letter = {
               character:obj,
               index:i,
               position: {
-                  left:x+"px",
-                  top:y+"px"
+                  left:x+"vw",
+                  top:y+"vh"
               }
           }
           temp.push(letter);
@@ -84,7 +86,7 @@ class Answer extends Component {
         var temp = [];
             for (var k = 0; k<arr.length; k++){
             for(var j = 0; j<this.state.alphabet.length; j++){
-              if(arr[k] == this.state.alphabet[j]){
+              if(arr[k].toLowerCase() == this.state.alphabet[j]){
                 //  console.log(this.state.msgArr[k]);
                   temp.push(j);
               }
@@ -138,18 +140,31 @@ class Answer extends Component {
       }
     
     return (
-      <div className="App">
-        {this.state.questionMsg}<br/>
-        {this.state.questionStr}
-        {pointer}
-        <div className="alphabet">
-        {alphaElement}
-        </div>
-        <div className="controls">
+        <div className="Ouija">
+        <Container>
+            <Row>
+                <Col xs="12">
+                {this.state.questionMsg}<br/>
+                {this.state.questionStr}
+                </Col>
+            </Row>
+        <Row>
+            <Col xs="12">
         <input type="text" placeholder="respond" onChange={this.handleMsg}/>
         <button onClick={this.makeArr}>answer</button>
-        </div>
-      </div>
+            </Col>
+        </Row>
+        <Row>
+            <Col xs="12">
+        {pointer}
+            <img src={OuijaBoard} alt="ouijaboard"/>
+            <div className="alphabet">
+            {alphaElement}
+            </div>
+            </Col>
+        </Row>
+        </Container>
+     </div>
     );
   }
 }

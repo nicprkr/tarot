@@ -1,27 +1,40 @@
-.alphabet {
-    width: 100%;
-    height: 100%;
-    background-color: pink;
-}
+
 .alphabet div {
     position:absolute;
     padding: 10px;
     margin: 2px;
     color: #CAA165;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 20pt;
+    text-transform: uppercase;
 }
 
 .pointer {
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: black;
+    height: 50px;
+    width: 50px;
     position: absolute;
     transition: 0.3s ease;
+    background-image: url('./ouija-pointer.svg');
+    z-index: 5;
 }
 .controls {
     position: absolute;
     top: 280px;
     left: 60px;
     width: 80%;
+}
+.Ouija {
+    background-color: white;
+    height: 100%;
+    border-radius: 11px 11px 11px 11px;
+}
+.ghost-btns {
+    border: 2px solid #CAA165;
+    border-radius: 10px;
+    width: 100px;
+}
+.ghost-btns #right {
+    position:relative;
+    clear: right;
+    float:left;
 }

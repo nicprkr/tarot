@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Pointer from './Pointer.js';
 import './Ouija.css';
 import mySocket from "socket.io-client";
+import OuijaBoard from "./../../imgs/ouijiboard-nonum-02.svg";
+import { Container, Row, Col } from 'reactstrap';
 
 class Ask extends Component {
     constructor(props){
@@ -25,21 +27,21 @@ class Ask extends Component {
       //this.socket = mySocket("https://chat-sckt.herokuapp.com/");
       this.socket = mySocket("http://localhost:10002");    
     //generates the alphabet
-      var x = 20;
-      var y = 140;
+      var x = 5;
+      var y = 22;
       var temp = [];
       this.state.alphabet.map((obj, i)=>{
-          x+= 40;
+          x+= 5;
           if(obj == "n"){
-              x = 40;
-              y+=60;
+              x = 10;
+              y+=10;
           }
           var letter = {
               character:obj,
               index:i,
               position: {
-                  left:x+"px",
-                  top:y+"px"
+                  left:x+"vw",
+                  top:y+"vw"
               }
           }
           temp.push(letter);
@@ -49,7 +51,7 @@ class Ask extends Component {
           });
       });
      this.socket.on("answers", (data)=>{
-        console.log(data);
+        console.log("answer: ", data);
          this.setState({
              spiritMsg:'The spirits have answered...'
          });
@@ -69,6 +71,9 @@ class Ask extends Component {
     //to do - spell out characters individually
     makeArr = () =>{
         this.socket.emit("letters", this.state.msg);
+        this.setState({
+            spiritMsg:'Your message has been sent!'
+        })
     }
     handleAnswer = (data)=>{
         var arr = data[data.length - 1];
@@ -139,18 +144,31 @@ class Ask extends Component {
       }
     
     return (
-      <div className="App">
-        {this.state.spiritMsg}
-        {spiritMsg}
-        {pointer}
-        <div className="alphabet">
-        {alphaElement}
-        </div>
-        <div className="controls">
-        <input type="text" placeholder="enter your message here" onChange={this.handleMsg}/>
-        <button onClick={this.makeArr}>ask</button>
-        </div>
-      </div>
+      <div className="Ouija">
+        <Container>
+            <Row>
+                <Col xs="12">
+                {this.state.spiritMsg}<br/>
+                {spiritMsg}
+                </Col>
+            </Row>
+        <Row>
+            <Col xs="12">
+                <input type="text" placeholder="enter your message here" onChange={this.handleMsg}/>
+                <button onClick={this.makeArr}>ask</button>
+            </Col>
+        </Row>
+        <Row>
+            <Col xs="12">
+                      {pointer}
+            <img src={OuijaBoard} alt="ouijaboard"/>
+            <div className="alphabet">
+            {alphaElement}
+            </div>
+            </Col>
+        </Row>
+        </Container>
+     </div>
     );
   }
 }
