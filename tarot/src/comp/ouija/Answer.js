@@ -25,11 +25,11 @@ class Answer extends Component {
         this.pointerDone = this.pointerDone.bind(this);
     }
     componentDidMount(){
-      //this.socket = mySocket("https://chat-sckt.herokuapp.com/");
+     // this.socket = mySocket("https://ouija-sckt.herokuapp.com/");
       this.socket = mySocket("http://localhost:10002");    
     //generates the alphabet
         var x = 5;
-      var y = 26;
+      var y = 22;
       var temp = [];
       this.state.alphabet.map((obj, i)=>{
           x+= 5;
@@ -42,7 +42,7 @@ class Answer extends Component {
               index:i,
               position: {
                   left:x+"vw",
-                  top:y+"vh"
+                  top:y+"vw"
               }
           }
           temp.push(letter);

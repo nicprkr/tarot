@@ -24,7 +24,7 @@ class Ask extends Component {
         this.pointerDone = this.pointerDone.bind(this);
     }
     componentDidMount(){
-      //this.socket = mySocket("https://chat-sckt.herokuapp.com/");
+     // this.socket = mySocket("https://ouija-sckt.herokuapp.com/"); 
       this.socket = mySocket("http://localhost:10002");    
     //generates the alphabet
       var x = 5;
