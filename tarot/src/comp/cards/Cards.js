@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import mySocket from 'socket.io-client';
+import './cards-css.css';
+import { Container, Row, Col } from 'reactstrap';
 
-class Test extends Component {
+
+class Cards extends Component {
     constructor(props){
     super(props);
         
@@ -149,15 +152,14 @@ class Test extends Component {
     }
     
     componentDidMount(){
-        this.socket = mySocket("https://tarot-sckt.herokuapp.com/");
-        //this.socket = mySocket("http://localhost:10000");
+        //this.socket = mySocket("https://tarot-sckt.herokuapp.com/");
+        this.socket = mySocket("http://localhost:10000");
         this.socket.on("newCardMsg", (data)=>{
             this.setState({
                 readerMsg: data
             });
         });
     }
-
     
     addToHand(obj){
         var tempArr = this.state.hand;
@@ -166,7 +168,14 @@ class Test extends Component {
         this.setState({
             hand: tempArr
         });
-                
+        
+        var indivCard = (
+            <div>
+                <p style={{fontWeight:"700"}}>{obj.name}</p>
+                <p>{obj.number}</p>
+            </div>
+        );
+        
         this.socket.emit("addCard", obj);
     
     }
@@ -179,6 +188,12 @@ class Test extends Component {
     
 
   render() {   
+      
+    var indivCard = (
+        <div>
+        <p>nothing</p>
+        </div>
+    );
 
       var view; 
       
@@ -186,26 +201,21 @@ class Test extends Component {
         var bgColor = i%2===1 ? "#f7f3f0" : "white";
           return (
             <div 
-              style={{backgroundColor:bgColor, borderStyle:"solid", borderColor:"grey", textAlign: "center", padding: "5px", width: "15%"}} 
-              className="tarotCard"
+              style={{backgroundColor: bgColor}}
+              className="allCards" 
               key={i}
               onClick={()=>this.addToHand(obj)}>
-              <p style={{fontWeight:"700"}}>{obj.name}</p>
-              <p>{obj.number}</p>
-                {//<p>{obj.meaning}</p>
-                }
+                
+                {indivCard}
+
             </div>
           );
       });
 
     var cardHand = this.state.hand.map((obj, i)=>{
         return(
-            <div key={i} style={{backgroundColor:"lightyellow", borderStyle:"solid", borderColor:"black", width: "15%", float:"right"}}>
+            <div className="allCards" key={i}>
                 <p>{obj.name}</p>
-                <p>{obj.number}</p>
-            {
-            //<p>{obj.meaning}</p>
-            }
             </div>
         );
     });
@@ -214,27 +224,45 @@ class Test extends Component {
           view = (
               <div>
                 <h3>Choose three cards</h3>
-                {cardDeck}
-                {cardHand}
+                <br />
+                <div className="flexCards">
+                    {cardDeck}
+                    {cardHand}
+                </div>
               </div>
           );
       }
       if (this.state.dealer === false){
           view = (
-            <h3>{this.state.readerMsg}</h3>
+            <div>
+                <h3>{this.state.readerMsg}</h3>
+            </div>
           );
       }
       
-      
-
+    
     return (
-      <div className="Test">
-        <button onClick={this.handleRole.bind(this, true)}>Dealer</button>
-        <button onClick={this.handleRole.bind(this, false)}>Reader</button>
-        {view}
+      <div className="Cards">
+        <Container>
+            <Row>
+                <Col xs="12">
+                    <div className="roleBtns">
+                        <button onClick={this.handleRole.bind(this, true)}>Dealer</button>
+                        <button onClick={this.handleRole.bind(this, false)}>Reader</button>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col xs="12">
+                    <div className="flexContainer">
+                        {view}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     </div>
     );
   }
 }
 
-export default Test;
+export default Cards;

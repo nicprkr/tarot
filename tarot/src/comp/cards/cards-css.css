@@ -1,0 +1,25 @@
+.flexContainer{
+    border: 1px solid #c3c3c3;
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    display: flex;
+    flex-direction: row; 
+    
+}
+
+.flexCards{
+    display: flex;
+    margin: 5px;
+    flex-wrap: wrap;
+}
+
+.allCards{
+    margin: 2px;
+    padding: 15px;
+    background-color: #333333;
+    color: #caa165;
+    border-radius: 20px;
+    min-height: 300px;
+    width:170px;
+}
+
