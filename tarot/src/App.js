@@ -7,7 +7,7 @@ import './App.css';
 import Stickers from './comp/sticker/Stickers.js';
 import Chat from './comp/chat/Chat.js';
 import Cards from './comp/cards/Cards.js';
-//import Ouiji from './comp/ouiji/Ouiji.js';
+import Ouija from './comp/ouija/Ouija.js';
 import { Container, Row, Col } from 'reactstrap';
 
 
@@ -37,7 +37,7 @@ class App extends Component {
         )
     } else if(this.state.tab === "ouiji"){
         comp = (
-        <div>Ouija</div>
+        <Ouija />
         )
     } else if(this.state.tab === "altar"){
         comp = (
