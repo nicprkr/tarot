@@ -24,8 +24,8 @@ class Ask extends Component {
         this.pointerDone = this.pointerDone.bind(this);
     }
     componentDidMount(){
-     // this.socket = mySocket("https://ouija-sckt.herokuapp.com/"); 
-      this.socket = mySocket("http://localhost:10002");    
+      this.socket = mySocket("https://ouija-sckt.herokuapp.com/"); 
+     // this.socket = mySocket("http://localhost:10002");    
     //generates the alphabet
       var x = 5;
       var y = 22;
@@ -57,31 +57,31 @@ class Ask extends Component {
          });
         this.handleAnswer(data);
     });
-    }
-    //handles user input    
-    handleMsg = (evt)=>{
-            this.setState({
-                msg:''
-            });
-        this.setState({
+}
+//handles user input    
+handleMsg = (evt)=>{
+    this.setState({
             msg:evt.target.value
         });
     }
-    //saves the input as an array of characters
-    //to do - spell out characters individually
-    makeArr = () =>{
+
+//saves the input as an array of characters
+//to do - spell out characters individually
+makeArr = () =>{
         this.socket.emit("letters", this.state.msg);
         this.setState({
             spiritMsg:'Your message has been sent!'
         })
     }
-    handleAnswer = (data)=>{
+handleAnswer = (data)=>{
+    //grabs most recent answer from the socket
         var arr = data[data.length - 1];
         this.setState({
             answer:arr
         })
         var temp = [];
-            for (var k = 0; k<arr.length; k++){
+    //checks each letter in the array against the alphabet to grab the index of the alphabet letter
+        for (var k = 0; k<arr.length; k++){
             for(var j = 0; j<this.state.alphabet.length; j++){
               if(arr[k] == this.state.alphabet[j]){
                 //  console.log(this.state.msgArr[k]);
@@ -91,15 +91,17 @@ class Ask extends Component {
         }
     console.log("letters ", temp);
     var temp2 = this.state.position;
-        if(temp2.length > 1){
+    //clears the position if it already exists
+    if(temp2.length > 1){
             temp2.length = 0;
-        }
+    }
+    //checks our array of letter indexes against the alphabet UI to snag the coordinates
     for(var q = 0; q < temp.length; q++){
         var index = temp[q];
-        console.log("getInfo "+ this.state.alphabetUI[index].character); 
+//        console.log("getInfo "+ this.state.alphabetUI[index].character); 
         temp2.push(this.state.alphabetUI[index]);
-           // pointerPos.push(alphaElement[this.state.letterIndex[q]].props.style);  
-          }
+     }
+    //gets the pointer to move
     console.log("pointer move ", temp2);
     this.setState({
         position:temp2,
@@ -160,11 +162,11 @@ class Ask extends Component {
         </Row>
         <Row>
             <Col xs="12">
-                      {pointer}
-            <img src={OuijaBoard} alt="ouijaboard"/>
-            <div className="alphabet">
-            {alphaElement}
-            </div>
+                {pointer}
+                <img src={OuijaBoard} alt="ouijaboard"/>
+                <div className="alphabet">
+                    {alphaElement}
+                </div>
             </Col>
         </Row>
         </Container>

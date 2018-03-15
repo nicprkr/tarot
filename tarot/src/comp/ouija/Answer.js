@@ -25,19 +25,19 @@ class Answer extends Component {
         this.pointerDone = this.pointerDone.bind(this);
     }
     componentDidMount(){
-     // this.socket = mySocket("https://ouija-sckt.herokuapp.com/");
-      this.socket = mySocket("http://localhost:10002");    
+    this.socket = mySocket("https://ouija-sckt.herokuapp.com/");
+    //  this.socket = mySocket("http://localhost:10002");    
     //generates the alphabet
-        var x = 5;
-      var y = 22;
-      var temp = [];
-      this.state.alphabet.map((obj, i)=>{
-          x+= 5;
-          if(obj == "n"){
-              x = 10;
-              y+=10;
-          }
-          var letter = {
+    var x = 5;
+    var y = 22;
+    var temp = [];
+    this.state.alphabet.map((obj, i)=>{
+        x+= 5;
+        if(obj == "n"){
+          x = 10;
+          y+=10;
+        }
+        var letter = {
               character:obj,
               index:i,
               position: {
@@ -45,43 +45,44 @@ class Answer extends Component {
                   top:y+"vw"
               }
           }
-          temp.push(letter);
-          //stores the letter coordinates
-          this.setState({
+        temp.push(letter);
+        //stores the letter coordinates
+        this.setState({
               alphabetUI:temp
           });
       });
+    //recieves questions from the other users
     this.socket.on("questions", (data)=>{
-            this.setState({
-                questions:data
+     this.setState({
+          questions:data
             });
         console.log(data);
-        this.handleQuestion(data);
+    this.handleQuestion(data);
         });
     }
-    handleQuestion = (data)=>{
+//pulls most recent question from the socket response array    
+handleQuestion = (data)=>{
         this.setState({
             questionMsg:'You have a new question!',
             questionStr:data[data.length - 1]
         });
     }
 
-    //handles user input    
-    handleMsg = (evt)=>{
-            this.setState({
-                msg:''
-            });
-        this.setState({
-            msg:evt.target.value
-        });
-    }
-    //saves the input as an array of characters
+//handles user input    
+handleMsg = (evt)=>{
+    this.setState({
+        msg:evt.target.value
+    });
+}
+
+//saves the input as an array of characters
     makeArr = () =>{
         var str = this.state.msg;
         var arr = str.split("");
             this.setState({
             msgArr:arr
             });
+        //sends response to the socket
         this.socket.emit("response", arr);
         var temp = [];
             for (var k = 0; k<arr.length; k++){
@@ -92,7 +93,7 @@ class Answer extends Component {
               }
            }
         }
-    console.log("letters ", temp);
+//    console.log("letters ", temp);
     var temp2 = this.state.position;
         if(temp2.length > 1){
             temp2.length = 0;
@@ -103,7 +104,7 @@ class Answer extends Component {
         temp2.push(this.state.alphabetUI[index]);
            // pointerPos.push(alphaElement[this.state.letterIndex[q]].props.style);  
           }
-    console.log("pointer move ", temp2);
+  //  console.log("pointer move ", temp2);
     this.setState({
         position:temp2,
         pointerMove:true
@@ -150,17 +151,17 @@ class Answer extends Component {
             </Row>
         <Row>
             <Col xs="12">
-        <input type="text" placeholder="respond" onChange={this.handleMsg}/>
-        <button onClick={this.makeArr}>answer</button>
+                <input type="text" placeholder="respond" onChange={this.handleMsg}/>
+                <button onClick={this.makeArr}>answer</button>
             </Col>
         </Row>
         <Row>
             <Col xs="12">
-        {pointer}
-            <img src={OuijaBoard} alt="ouijaboard"/>
-            <div className="alphabet">
-            {alphaElement}
-            </div>
+                {pointer}
+                <img src={OuijaBoard} alt="ouijaboard"/>
+                <div className="alphabet">
+                    {alphaElement}
+                </div>
             </Col>
         </Row>
         </Container>
