@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Row, Col } from 'reactstrap';
 
 class Rooms extends Component {
     
@@ -10,13 +11,13 @@ class Rooms extends Component {
   render() {
       
     return (
-      <div className="Rooms">
+      <Container className="Rooms">
         <button onClick={this.props.handleDisplay.bind(this,"room1")}>Room1</button>
         <button onClick={this.props.handleDisplay.bind(this,"room2")}>Room2</button>
         <button onClick={this.props.handleDisplay.bind(this,"room3")}>Room3</button>
         <button onClick={this.props.handleDisplay.bind(this,"room4")}>Room4</button>
         <button onClick={this.props.handleDisplay.bind(this,"room5")}>Room5</button>
-      </div>
+      </Container>
     );
   }
 }
