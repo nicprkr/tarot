@@ -29,12 +29,12 @@
     border-radius: 11px 11px 11px 11px;
 }
 .ghost-btns {
-    border: 2px solid #CAA165;
-    border-radius: 10px;
     width: 100px;
+    margin: 5px;
+    text-align: center;
+    display: inline-block;
 }
-.ghost-btns #right {
-    position:relative;
-    clear: right;
-    float:left;
+
+.boardBG{
+    background-color: #333333;
 }

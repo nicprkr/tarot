@@ -18,7 +18,7 @@ class Ask extends Component {
             letterIndex:[],
             position:[],
             pointerMove:false,
-            spiritMsg:'ask the spirits...',
+            spiritMsg:'Ask the spirits your question',
             answer:[]
             }
         this.pointerDone = this.pointerDone.bind(this);
@@ -70,7 +70,7 @@ handleMsg = (evt)=>{
 makeArr = () =>{
         this.socket.emit("letters", this.state.msg);
         this.setState({
-            spiritMsg:'Your message has been sent!'
+            spiritMsg:'Your message was delivered to the spirit realm'
         })
     }
 handleAnswer = (data)=>{
@@ -156,14 +156,16 @@ handleAnswer = (data)=>{
             </Row>
         <Row>
             <Col xs="12">
-                <input type="text" placeholder="enter your message here" onChange={this.handleMsg}/>
+                <input className="text-input" style={{marginBottom: "20px"}} type="text" placeholder="dear spirits..." onChange={this.handleMsg}/>
                 <button onClick={this.makeArr}>ask</button>
             </Col>
         </Row>
         <Row>
             <Col xs="12">
                 {pointer}
-                <img src={OuijaBoard} alt="ouijaboard"/>
+                <div className="boardBG">
+                    <img src={OuijaBoard} alt="ouijaboard"/>
+                </div>
                 <div className="alphabet">
                     {alphaElement}
                 </div>

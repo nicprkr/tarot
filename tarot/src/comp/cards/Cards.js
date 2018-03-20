@@ -15,145 +15,147 @@ class Cards extends Component {
             dealer: null,
             twoplayer: true,
             hand: [],
+            introMsg: "Want to get your fortune read? Or read for another?",
             readerMsg: "Waiting for your dealer",
             cards: [
         {
             name: "The Fool",
             number: 0,
-            meaning: "yr foolish"
+            meaning: "Let go of expectations and trust your instincts."
+
         }, 
           
         {
             name: "The Magician",
             number: 1,
-            meaning: "yr magical"
+            meaning: "Be creative and stay open -- your possibilities are endless."
         },
             
         {
             name: "The High Priestess",
             number: 2,
-            meaning: "yr a gooddess"
+            meaning: "Get your self out of the way and become attuned to a more spiritual view."
         },
             
         {
             name: "The Empress",
             number: 3,
-            meaning: "yr magical"
+            meaning: "Look for opportunities to be generous, warm, and nurturing."
         },
             
         {
             name: "The Emperor",
             number: 4,
-            meaning: "yr magical"
+            meaning: "You have the wisdom and authority to achieve your goals."
         },
             
         {
             name: "The Hierophant",
             number: 5,
-            meaning: "yr magical"
+            meaning: "Expand your inner knowledge and share it with others."
         },
             
         {
             name: "The Lovers",
             number: 6,
-            meaning: "yr magical"
+            meaning: "Integrate two potential realities or let go of one of them."
         },
             
         {
             name: "The Chariot",
             number: 7,
-            meaning: "yr magical"
+            meaning: "Use your powers of freedom and flexibility to drive your future."
         },
             
         {
             name: "Strength",
             number: 8,
-            meaning: "yr magical"
+            meaning: "Balance your primal force with intuition and compassion."
         },
             
         {
             name: "The Hermit",
             number: 9,
-            meaning: "yr magical"
+            meaning: "Gaze into the mysteries of your inner life."
         },
             
          {
             name: "Wheel of Fortune",
             number: 10,
-            meaning: "yr magical"
+            meaning: "Learn to go with the flow without resisting ups and downs."
         },
             
         {
             name: "Justice",
             number: 11,
-            meaning: "yr magical"
+            meaning: "Balance the scales to support truth and serve the greatest good."
         },
             
          {
             name: "The Hanged Man",
             number: 12,
-            meaning: "yr magical"
+            meaning: "You have reached a crossroads, making it possible to clear the slate and start over."
         },
             
         {
             name: "Death",
             number: 13,
-            meaning: "yr magical"
+            meaning: "Shed the old to make room for the new."
         },
             
          {
             name: "Temperance",
             number: 14,
-            meaning: "yr magical"
+            meaning: "The time is now for self-healing."
         },
             
          {
             name: "The Devil",
             number: 15,
-            meaning: "yr magical"
+            meaning: "Put subtlety aside and empower your passion and confidence."
         },
             
          {
             name: "The Tower",
             number: 16,
-            meaning: "yr magical"
+            meaning: "Because of circumstances beyond your control, you have no choice."
         },
             
         {
             name: "The Star",
             number: 17,
-            meaning: "yr magical"
+            meaning: "Rise above your day-to-day and connect with the divine."
         },
         
          {
             name: "The Moon",
             number: 18,
-            meaning: "yr magical"
+            meaning: "This is an opportunity to draw messages from your inner self."
         },
             
          {
             name: "The Sun",
             number: 19,
-            meaning: "yr magical"
+            meaning: "You are in the right place at the right time."
         },
             
          {
             name: "Judgement",
             number: 20,
-            meaning: "yr magical"
+            meaning: "You have the power to make changes and feel complete."
         },
             
         {
             name: "The World",
             number: 21,
-            meaning: "yr magical"
+            meaning: "You are in a timeless state of grace where all is well."
         }]
         }
     }
     
     componentDidMount(){
-        //this.socket = mySocket("https://tarot-sckt.herokuapp.com/");
-        this.socket = mySocket("http://localhost:10000");
+        this.socket = mySocket("https://tarot-sckt.herokuapp.com/");
+        //this.socket = mySocket("http://localhost:10000");
         this.socket.on("newCardMsg", (data)=>{
             this.setState({
                 readerMsg: data
@@ -191,23 +193,20 @@ class Cards extends Component {
       
     var indivCard = (
         <div>
-        <p>nothing</p>
         </div>
     );
 
       var view; 
       
       var cardDeck = this.state.cards.map((obj, i)=>{
-        var bgColor = i%2===1 ? "#f7f3f0" : "white";
+        
           return (
             <div 
-              style={{backgroundColor: bgColor}}
+              
               className="allCards" 
               key={i}
               onClick={()=>this.addToHand(obj)}>
-                
                 {indivCard}
-
             </div>
           );
       });
@@ -246,9 +245,11 @@ class Cards extends Component {
         <Container>
             <Row>
                 <Col xs="12">
-                    <div className="roleBtns">
-                        <button onClick={this.handleRole.bind(this, true)}>Dealer</button>
-                        <button onClick={this.handleRole.bind(this, false)}>Reader</button>
+                    {this.state.introMsg}
+                    <br />
+                    <div className="btn-group">
+                        <button className="ghost-btns" onClick={this.handleRole.bind(this, true)}>Dealer</button>
+                        <button className="ghost-btns" onClick={this.handleRole.bind(this, false)}>Reader</button>
                     </div>
                 </Col>
             </Row>

@@ -19,7 +19,7 @@ class Answer extends Component {
             letterIndex:[],
             position:[],
             pointerMove:false,
-            questionMsg:'waiting for a question...',
+            questionMsg:'Waiting for contact...',
             questionStr:''
             }
         this.pointerDone = this.pointerDone.bind(this);
@@ -151,14 +151,16 @@ handleMsg = (evt)=>{
             </Row>
         <Row>
             <Col xs="12">
-                <input type="text" placeholder="respond" onChange={this.handleMsg}/>
+                <input className="text-input" style={{marginBottom: "20px"}}  type="text" placeholder="respond" onChange={this.handleMsg}/>
                 <button onClick={this.makeArr}>answer</button>
             </Col>
         </Row>
         <Row>
             <Col xs="12">
                 {pointer}
+                <div className="boardBG">
                 <img src={OuijaBoard} alt="ouijaboard"/>
+                </div>
                 <div className="alphabet">
                     {alphaElement}
                 </div>

@@ -26,11 +26,11 @@ class Ouija extends Component {
                 </Row>
               <br/>
                 <Row>
-                    <Col xs="6">
+                    <Col xs="12">
+                        <div className="btn-group">
                         <button onClick={()=>{this.setState({ tab: 1})}} className="ghost-btns">Seeker</button>
-                    </Col>
-                    <Col xs="6">
                         <button onClick={()=>{this.setState({ tab: 2})}} className="ghost-btns" id="right">Spirit</button>
+                        </div>
                     </Col>
               </Row>
         </Container>
