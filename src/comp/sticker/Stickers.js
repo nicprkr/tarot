@@ -42,7 +42,7 @@ class Stickers extends Component {
             });
             
             this.refs.thedisplay.addEventListener("mousemove", (ev)=>{
-            console.log(ev.pageX, ev.pageY)
+            //console.log(ev.pageX, ev.pageY)
                 if(this.state.myId === null){
                     //FAIL
                     return false;
