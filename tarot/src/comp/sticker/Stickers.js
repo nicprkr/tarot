@@ -8,8 +8,14 @@ class Stickers extends Component {
     constructor(props){
         super(props);
         this.state = {
-            myImg:require("./pic1.png"),
-            myImg2:require("./pic2.png"),
+            candle: require("../../imgs/candle.png"),
+            singingbowl: require("../../imgs/singingbowl.png"),
+            pentagram: require("../../imgs/pentagram.png"),
+            quartz: require("../../imgs/quartz.png"),
+            chalice: require("../../imgs/chalice.png"),
+            dragoncup: require("../../imgs/dragoncup.png"),
+            saltlamp: require("../../imgs/saltlamp.png"),
+            tapestry: require("../../imgs/tapestry.png"),
             allusers:[],
             myId:null,
             showDisplay:false,
@@ -21,8 +27,8 @@ class Stickers extends Component {
     }
     
     componentDidMount(){
-        this.socket = mySocket("http://localhost:10005");
-        //this.socket = mySocket("https://stickersockets.herokuapp.com");
+        //this.socket = mySocket("http://localhost:10005");
+        this.socket = mySocket("https://stickersockets.herokuapp.com");
         
         this.socket.on("userjoined", (data)=>{
             this.setState({
@@ -44,7 +50,6 @@ class Stickers extends Component {
 
                 this.refs["u"+this.state.myId].style.left = (ev.pageX-90)+"px";
                 this.refs["u"+this.state.myId].style.top = (ev.pageY-330)+"px";
-                //this.refs."u"+this.state.myId.style
 
                 this.socket.emit("mymove", {
                     x:(ev.pageX-90),
@@ -78,26 +83,6 @@ class Stickers extends Component {
             
         });
         
-        /*
-        this.refs.thedisplay.addEventListener("mousemove", (ev)=>{
-            
-            if(this.state.myId === null){
-                //FAIL
-                return false;
-            }
-            
-            this.refs["u"+this.state.myId].style.left = ev.pageX+"px";
-            this.refs["u"+this.state.myId].style.top = ev.pageY+"px";
-            //this.refs."u"+this.state.myId.style
-            
-            this.socket.emit("mymove", {
-                x:ev.pageX,
-                y:ev.pageY,
-                id:this.state.myId,
-                src:this.refs["u"+this.state.myId].src
-            })
-        });
-        */
     }
     
     handleImage(evt){
@@ -134,18 +119,31 @@ class Stickers extends Component {
             comp = <Rooms 
                 handleDisplay={this.handleDisplay}
             />;
+            
         } else {
             //Display
             comp = (
                 <div>
+                
                     <div ref="thedisplay" id="display">
                         {allimgs}
                         {allstickers}
+                        <div id="altarTable">
+                            <img style={{paddingTop:"100px"}} height="400px" src={require("../../imgs/table.png")}/> 
+                        </div>
                     </div>
+                
                     <div id="controls">
-                        {this.state.myId}
-                        <img src={this.state.myImg} height={50} onClick={this.handleImage} />
-                        <img src={this.state.myImg2} height={50} onClick={this.handleImage} />
+                        <div id="stickerChoice" style={{flexDirection:"column"}}>
+                            <img onClick={this.handleImage} height="100px" src={this.state.candle}/>
+                            <img onClick={this.handleImage} height="100px" src={this.state.quartz}/>
+                            <img onClick={this.handleImage} height="100px" src={this.state.chalice}/>
+                            <img onClick={this.handleImage} height="100px" src={this.state.singingbowl}/>
+                            <img onClick={this.handleImage} height="100px" src={this.state.dragoncup}/>
+                            <img onClick={this.handleImage} height="100px" src={this.state.pentagram}/>
+                            <img onClick={this.handleImage} height="100px" src={this.state.saltlamp}/>
+                            <img onClick={this.handleImage} height="100px" src={this.state.tapestry}/>
+                        </div>
                     </div>
                 </div>
             )
@@ -153,7 +151,14 @@ class Stickers extends Component {
         
         return (
             <Container>
-                {comp}
+            
+                <Row>
+                    <Col xs="12">
+                        {comp}
+                        
+                    </Col>
+                </Row>
+                                                                                  
             </Container>
         );
     }
