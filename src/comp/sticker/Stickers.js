@@ -29,8 +29,8 @@ class Stickers extends Component {
     }
     
     componentDidMount(){
-        //this.socket = mySocket("http://localhost:10005");
-        this.socket = mySocket("https://sticker-sckt.herokuapp.com/");
+        this.socket = mySocket("http://localhost:10005");
+        //this.socket = mySocket("https://sticker-sckt.herokuapp.com/");
         
         this.socket.on("userjoined", (data)=>{
             this.setState({
@@ -44,7 +44,7 @@ class Stickers extends Component {
             });
             
             this.refs.thedisplay.addEventListener("mousemove", (ev)=>{
-            //console.log(ev.pageX, ev.pageY)
+            //console.log(ev.pageX, ev.pageY);
                 if(this.state.myId === null){
                     //FAIL
                     return false;
@@ -92,7 +92,8 @@ class Stickers extends Component {
     
     handleImage(evt){
         this.refs["u"+this.state.myId].src = evt.target.src;
-        this.refs["u"+this.state.myId].height = evt.target.trueheight;
+        this.refs["u"+this.state.myId].height = evt.target.height;
+        console.log("evt clicked", evt.target);
     }
     
     handleDisplay(roomString){
@@ -143,7 +144,7 @@ class Stickers extends Component {
                         <div id="stickerChoice" style={{flexDirection:"column"}}>
                             {Object.values(this.state.baseStickers).map((obj, i)=>{
                                 return (
-                                    <img onClick={this.handleImage} key={i} src={obj.src} height="100px" trueheight={obj.height}/>
+                                    <img onClick={this.handleImage} key={i} src={obj.src} height={obj.height}/>
                                 )
                             })}
                         </div>
