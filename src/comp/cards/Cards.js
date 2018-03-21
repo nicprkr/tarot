@@ -12,6 +12,7 @@ class Cards extends Component {
         this.handleRole = this.handleRole.bind(this);
         
         this.state = {
+            numflipped: 0,
             dealer: null,
             twoplayer: true,
             hand: [],
@@ -178,67 +179,63 @@ class Cards extends Component {
     componentDidMount(){
         this.socket = mySocket("https://tarot-sckt.herokuapp.com/");
         //this.socket = mySocket("http://localhost:10000");
-        this.socket.on("newCardMsg", (data)=>{
+        this.socket.on("readerCards", (data)=>{
             this.setState({
-                readerMsg: data
+                cards: data
             });
         });
-    }
-    
-        addToHand(obj){
-        var tempArr = this.state.hand;
-        
-        this.setState({
-            hand: tempArr
-        });
-        
-        var indivCard = (
-            <div>
-                <p style={{fontWeight:"700"}}>{obj.name}</p>
-                <p>{obj.number}</p>
-            </div>
-        );
-        
-        this.socket.emit("addCard", obj);
     
     }
+    
+        addToHand(obj, i){
+            
+            if (this.state.numflipped === 3){
+                return
+            }
+            
+            var tempArr = this.state.cards;
+            tempArr[i].flipped = true;
+            this.setState({
+                cards: tempArr,
+                numflipped: this.state.numflipped +1
+            });
+
+            this.socket.emit("addCard", this.state.cards);
+        }
     
     handleRole=(isDealer)=>{
         this.setState({
             dealer: isDealer
         })
     }
-    
+
 
   render() {   
-      
-    var indivCard = (
-        <div>
-        </div>
-    );
 
       var view; 
       
       var cardDeck = this.state.cards.map((obj, i)=>{
-        
+        if(obj.flipped){
+            return(
+                <div className="cardFront">
+                    {obj.name}
+                    <br />
+                    {obj.number}
+                    <br />
+                    {obj.meaning}
+                </div>
+            )
+        } else if (this.state.dealer === true) {
           return (
-            <div 
-              
-              className="allCards" 
+            <div  
+              className="cardBack" 
               key={i}
-              onClick={()=>this.addToHand(obj)}>
-                {indivCard}
+              onClick={()=>this.addToHand(obj, i)}>
             </div>
           );
+      }
       });
 
-    var cardHand = this.state.hand.map((obj, i)=>{
-        return(
-            <div className="allCards" key={i}>
-                <p>{obj.name}</p>
-            </div>
-        );
-    });
                 
       if (this.state.dealer === true){
           view = (
@@ -247,7 +244,7 @@ class Cards extends Component {
                 <br />
                 <div className="flexCards">
                     {cardDeck}
-                    {cardHand}
+
                 </div>
               </div>
           );
@@ -255,7 +252,9 @@ class Cards extends Component {
       if (this.state.dealer === false){
           view = (
             <div>
-                <h3>{this.state.readerMsg}</h3>
+                <div className="flexCards">
+                    {cardDeck}
+                </div>
             </div>
           );
       }

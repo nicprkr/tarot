@@ -8,18 +8,20 @@ class Stickers extends Component {
     constructor(props){
         super(props);
         this.state = {
-            candle: require("../../imgs/candle.png"),
-            singingbowl: require("../../imgs/singingbowl.png"),
-            pentagram: require("../../imgs/pentagram.png"),
-            quartz: require("../../imgs/quartz.png"),
-            chalice: require("../../imgs/chalice.png"),
-            dragoncup: require("../../imgs/dragoncup.png"),
-            saltlamp: require("../../imgs/saltlamp.png"),
-            tapestry: require("../../imgs/tapestry.png"),
             allusers:[],
             myId:null,
             showDisplay:false,
-            stickers:[]
+            stickers:[],
+            baseStickers: {
+                    candle: {src: require("../../imgs/candle.png"), height: "100px"},
+                    singingbowl: {src: require("../../imgs/singingbowl.png"), height: "50px"},
+                    pentagram: {src: require("../../imgs/pentagram.png"), height: "50px"},
+                    quartz: {src: require("../../imgs/quartz.png"), height: "50px"},
+                    chalice: {src: require("../../imgs/chalice.png"), height: "50px"},
+                    dragoncup: {src: require("../../imgs/dragoncup.png"), height: "75px"},
+                    saltlamp: {src: require("../../imgs/saltlamp.png"), height: "50px"},
+                    tapestry: {src: require("../../imgs/tapestry.png"), height: "50px"}
+                }
         }
         
         this.handleImage = this.handleImage.bind(this);
@@ -42,7 +44,7 @@ class Stickers extends Component {
             });
             
             this.refs.thedisplay.addEventListener("mousemove", (ev)=>{
-            console.log(ev.pageX, ev.pageY)
+            //console.log(ev.pageX, ev.pageY)
                 if(this.state.myId === null){
                     //FAIL
                     return false;
@@ -55,7 +57,8 @@ class Stickers extends Component {
                     x:(ev.pageX-90),
                     y:(ev.pageY-330),
                     id:this.state.myId,
-                    src:this.refs["u"+this.state.myId].src
+                    src:this.refs["u"+this.state.myId].src,
+                    height:this.refs["u"+this.state.myId].height
                 })
             });
             
@@ -63,30 +66,33 @@ class Stickers extends Component {
                 this.socket.emit("stick", {
                     x:(ev.pageX-90),
                     y:(ev.pageY-330),
-                    src:this.refs["u"+this.state.myId].src
+                    src:this.refs["u"+this.state.myId].src,
+                    height:this.refs["u"+this.state.myId].height
                 });
             });
 
         });
 
         this.socket.on("newsticker", (data)=>{
+            console.log(data);
             this.setState({
                 stickers:data
             });
         });
         
-        this.socket.on("newmove", (data)=>{
-            //console.log(data);
-            this.refs["u"+data.id].style.left = data.x+"px";
-            this.refs["u"+data.id].style.top = data.y+"px";
-            this.refs["u"+data.id].src = data.src;
-            
-        });
+//        this.socket.on("newmove", (data)=>{
+//            //console.log(data);
+//            this.refs["u"+data.id].style.left = data.x+"px";
+//            this.refs["u"+data.id].style.top = data.y+"px";
+//            this.refs["u"+data.id].src = data.src;
+//            
+//        });
         
     }
     
     handleImage(evt){
         this.refs["u"+this.state.myId].src = evt.target.src;
+        this.refs["u"+this.state.myId].height = evt.target.trueheight;
     }
     
     handleDisplay(roomString){
@@ -101,14 +107,14 @@ class Stickers extends Component {
         
         var allimgs = this.state.allusers.map((obj, i)=>{
             return (
-                <img ref={"u"+obj} className="allImgs" src={this.state.myImg} height={50} key={i} />
+                <img ref={"u"+obj} className="allImgs" src={this.state.myImg} height={obj.height} key={i} />
             )    
         });
         
         var allstickers = this.state.stickers.map((obj, i)=>{
             var mstyle = {left:obj.x, top:obj.y};
             return (
-                <img style={mstyle} key={i} src={obj.src} height={50} className="allImgs" />
+                <img style={mstyle} key={i} src={obj.src} height={obj.height} className="allImgs" />
             )
         })
         
@@ -135,14 +141,11 @@ class Stickers extends Component {
                 
                     <div id="controls">
                         <div id="stickerChoice" style={{flexDirection:"column"}}>
-                            <img onClick={this.handleImage} height="100px" src={this.state.candle}/>
-                            <img onClick={this.handleImage} height="100px" src={this.state.quartz}/>
-                            <img onClick={this.handleImage} height="100px" src={this.state.chalice}/>
-                            <img onClick={this.handleImage} height="100px" src={this.state.singingbowl}/>
-                            <img onClick={this.handleImage} height="100px" src={this.state.dragoncup}/>
-                            <img onClick={this.handleImage} height="100px" src={this.state.pentagram}/>
-                            <img onClick={this.handleImage} height="100px" src={this.state.saltlamp}/>
-                            <img onClick={this.handleImage} height="100px" src={this.state.tapestry}/>
+                            {Object.values(this.state.baseStickers).map((obj, i)=>{
+                                return (
+                                    <img onClick={this.handleImage} key={i} src={obj.src} height="100px" trueheight={obj.height}/>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>
