@@ -106,12 +106,6 @@ class Stickers extends Component {
     handleImage(evt){
         
         this.refs["u"+this.state.myId].src = evt.target.src;
-<<<<<<< HEAD
-        console.log(this.getHeight(evt.target.src));
-=======
-        this.refs["u"+this.state.myId].height = evt.target.height;
-        console.log("evt clicked", evt.target);
->>>>>>> 0528e33ea8c4e9a28ad4615f33404f5d7d62ce23
     }
     
     handleDisplay(roomString){
@@ -161,7 +155,6 @@ class Stickers extends Component {
                         </Col>
                     </Row>
                 
-<<<<<<< HEAD
                     <Row>
                         <Col xs="12">
                             <div id="controls">
@@ -175,25 +168,7 @@ class Stickers extends Component {
                             </div>
                         </Col>
                     </Row>
-=======
-                    <div ref="thedisplay" id="display">
-                        {allimgs}
-                        {allstickers}
-                        <div id="altarTable">
-                            <img style={{paddingTop:"100px"}} height="400px" src={require("../../imgs/table.png")}/> 
-                        </div>
-                    </div>
-                
-                    <div id="controls">
-                        <div id="stickerChoice" style={{flexDirection:"column"}}>
-                            {Object.values(this.state.baseStickers).map((obj, i)=>{
-                                return (
-                                    <img onClick={this.handleImage} key={i} src={obj.src} height={obj.height}/>
-                                )
-                            })}
-                        </div>
-                    </div>
->>>>>>> 0528e33ea8c4e9a28ad4615f33404f5d7d62ce23
+
                 </div>
             )
         }
