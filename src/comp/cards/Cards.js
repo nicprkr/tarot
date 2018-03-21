@@ -218,11 +218,14 @@ class Cards extends Component {
         if(obj.flipped){
             return(
                 <div className="cardFront">
-                    {obj.name}
-                    <br />
+                    <div style={{fontWeight: "700", fontSize: "11pt", textTransform: "uppercase", letterSpacing:"1.5px", textAlign: "center"}}>
+                        {obj.name}
+                    </div>
                     {obj.number}
                     <br />
-                    {obj.meaning}
+                    <div style={{fontWeight: "100", fontSize: "8pt", textTransform: "capitalize", letterSpacing:"0.5px", textAlign: "center"}}>
+                        {obj.meaning}
+                    </div>
                 </div>
             )
         } else if (this.state.dealer === true) {
